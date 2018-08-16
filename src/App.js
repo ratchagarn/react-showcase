@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { injectGlobal } from 'styled-components'
+
+import Container from 'UI/Container'
+import Case01 from 'features/Case01'
+
+injectGlobal([`
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif
+  }
+`])
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Container>
+        <Case01 />
+      </Container>
+    )
   }
 }
 
-export default App;
+export default App
