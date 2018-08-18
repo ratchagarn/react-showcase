@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
+
+import Container from 'UI/Container'
 
 
 class Case01 extends Component {
@@ -20,14 +22,14 @@ class Case01 extends Component {
     }
 
     return (
-      <Fragment>
+      <Container>
         <h1>Case 01</h1>
         <Wrapper>
           {fields}
         </Wrapper>
         <br />
         <button onClick={this.handleOnAddField}>Add new field</button>
-      </Fragment>
+      </Container>
     )
   }
 
