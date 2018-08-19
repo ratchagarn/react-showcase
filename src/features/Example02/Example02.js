@@ -21,24 +21,25 @@ class Example02 extends Component {
 
   render() {
     const { counters } = this.state
-    const counterItems = counters.map((count, i) => (
-      <Counter
-        key={`counter-${i}`}
-        index={i}
-        count={count}
-        onDelete={this.handleOnDelete}
-        onAdd={this.handleOnAdd}
-        onMinus={this.handleOnMinus}
-      />
-    ))
+    const counterItems = counters.length > 0 ? (
+      counters.map((count, i) => (
+        <Counter
+          key={`counter-${i}`}
+          index={i}
+          count={count}
+          onDelete={this.handleOnDelete}
+          onAdd={this.handleOnAdd}
+          onMinus={this.handleOnMinus}
+        />
+      ))
+    )
+    : <p>Don't have any counter, please click Add Counter.</p>
 
     return (
       <LayoutExamplePage title="Example 02" sourceName="Example02">
         <button onClick={this.handleAddCounter}>Add Counter</button>
         <hr />
-        {counterItems.length > 0 ? counterItems : (
-          <p>Don't have any counter, please click Add Counter.</p>
-        )}
+        {counterItems}
       </LayoutExamplePage>
     )
   }
