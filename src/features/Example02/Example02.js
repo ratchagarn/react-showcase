@@ -37,7 +37,7 @@ class Example02 extends Component {
         <button onClick={this.handleAddCounter}>Add Counter</button>
         <hr />
         {counterItems.length > 0 ? counterItems : (
-          <p>Don't have any counter, please click `Add Counter`.</p>
+          <p>Don\'t have any counter, please click `Add Counter`.</p>
         )}
       </LayoutExamplePage>
     )
