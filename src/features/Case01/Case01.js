@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import Container from 'UI/Container'
+import PageTitle from 'UI/PageTitle'
+import ViewSource from 'UI/ViewSource'
 
 
 class Case01 extends Component {
@@ -23,7 +25,8 @@ class Case01 extends Component {
 
     return (
       <Container>
-        <h1>Case 01</h1>
+        <PageTitle>Case 01</PageTitle>
+        <ViewSource name="Case01" />
         <Wrapper>
           {fields}
         </Wrapper>

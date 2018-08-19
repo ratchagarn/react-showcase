@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 const menu = [
   {
     name: 'Home',
     path: '/',
+    exact: true,
   },
   {
     name: 'Case 01',
@@ -17,7 +18,7 @@ const menu = [
 const Layout = ({ children }) => {
   const menuList = menu.map((item, i) => (
     <Menu.Item key={`menu-item-${i}`}>
-      <Link to={item.path}>{item.name}</Link>
+      <NavLink exact={item.exact} to={item.path}>{item.name}</NavLink>
     </Menu.Item>
   ))
 
@@ -68,16 +69,20 @@ const Menu = styled.ul`
 `
 
 Menu.Item = styled.li`
-  padding: 10px;
+  padding: 5px;
   list-style: none;
 
   > a {
     display: block;
-    color: blue;
+    color: #333;
+    font-size: 14px;
     text-decoration: none;
 
+    &.active {
+      font-weight: bold;
+    }
+
     &:hover {
-      color: red;
       text-decoration: underline;
     }
   }

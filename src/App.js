@@ -20,6 +20,7 @@ injectGlobal([`
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: white;
     font-family: Arial, Helvetica, sans-serif
   }
 `])
@@ -32,7 +33,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/case01" component={Case01} />
+            <Route path="/case01" component={Case01} />
           </Switch>
         </Layout>
       </Router>
