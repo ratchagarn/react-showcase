@@ -4,7 +4,7 @@ import { injectGlobal } from 'styled-components'
 
 import Layout from 'UI/Layout'
 import Home from 'features/Home'
-import Case01 from 'features/Case01'
+import Example01 from 'features/Example01'
 
 
 injectGlobal([`
@@ -42,7 +42,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/case01" component={Case01} />
+            <Route path="/example01" component={Example01} />
           </Switch>
         </Layout>
       </Router>

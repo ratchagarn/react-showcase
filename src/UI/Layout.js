@@ -10,8 +10,8 @@ const menu = [
     exact: true,
   },
   {
-    name: 'Case 01',
-    path: '/case01',
+    name: 'Example 01',
+    path: '/example01',
   },
 ]
 

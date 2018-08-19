@@ -1,6 +1,6 @@
 /**
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
- * Features - Case01/index
+ * Features - Example01/index
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
-export { default } from './Case01'
+export { default } from './Example01'

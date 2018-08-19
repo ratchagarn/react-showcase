@@ -1,6 +1,6 @@
 /**
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
- * Features - Case01
+ * Features - Example01
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
 import React, { Component } from 'react'
@@ -11,7 +11,7 @@ import PageTitle from 'UI/PageTitle'
 import ViewSource from 'UI/ViewSource'
 
 
-class Case01 extends Component {
+class Example01 extends Component {
   constructor(props) {
     super(props)
 
@@ -31,7 +31,7 @@ class Case01 extends Component {
     return (
       <Container>
         <PageTitle>Case 01</PageTitle>
-        <ViewSource name="Case01" />
+        <ViewSource name="Example01" />
         <Wrapper>
           {fields}
         </Wrapper>
@@ -46,7 +46,7 @@ class Case01 extends Component {
   }
 }
 
-export default Case01
+export default Example01
 
 
 const InputBlock = ({ title, onChange }) => (
