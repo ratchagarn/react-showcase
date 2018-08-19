@@ -8,7 +8,8 @@ const ViewSource = ({ name }) => (
   <Container>
     <Link
       href={`${baseUrl}/${name}/${name}.js`}
-      target="_blank">
+      target="_blank"
+      rel="noopener noreferrer">
       View Source
     </Link>
   </Container>
