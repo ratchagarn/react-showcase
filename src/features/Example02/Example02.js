@@ -33,7 +33,7 @@ class Example02 extends Component {
         />
       ))
     )
-    : <p>Don't have any counter, please click Add Counter.</p>
+    : <p>You not have any counter. Please click Add Counter button.</p>
 
     return (
       <LayoutExamplePage title="Example 02" sourceName="Example02">
