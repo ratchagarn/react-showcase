@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
 
 import Layout from 'UI/Layout'
+
 import Home from 'features/Home'
 import Example01 from 'features/Example01'
+import NoMatch from 'features/NoMatch'
 
 
 injectGlobal([`
@@ -43,6 +45,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/example01" component={Example01} />
+            <Route component={NoMatch} />
           </Switch>
         </Layout>
       </Router>
