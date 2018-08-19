@@ -30,7 +30,7 @@ class Example01 extends Component {
 
     return (
       <Container>
-        <PageTitle>Case 01</PageTitle>
+        <PageTitle>Example 01</PageTitle>
         <ViewSource name="Example01" />
         <Wrapper>
           {fields}
