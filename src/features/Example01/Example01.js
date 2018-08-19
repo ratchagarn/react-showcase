@@ -6,9 +6,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import Container from 'UI/Container'
-import PageTitle from 'UI/PageTitle'
-import ViewSource from 'UI/ViewSource'
+import LayoutExamplePage from 'UI/LayoutExamplePage'
 
 
 class Example01 extends Component {
@@ -29,15 +27,13 @@ class Example01 extends Component {
     }
 
     return (
-      <Container>
-        <PageTitle>Example 01</PageTitle>
-        <ViewSource name="Example01" />
+      <LayoutExamplePage title="Example 01" sourceName="Example01">
         <Wrapper>
           {fields}
         </Wrapper>
         <br />
         <button onClick={this.handleOnAddField}>Add new field</button>
-      </Container>
+      </LayoutExamplePage>
     )
   }
 
