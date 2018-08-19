@@ -6,6 +6,7 @@ import Layout from 'UI/Layout'
 
 import Home from 'features/Home'
 import Example01 from 'features/Example01'
+import Example02 from 'features/Example02'
 import NoMatch from 'features/NoMatch'
 
 
@@ -45,6 +46,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/example01" component={Example01} />
+            <Route path="/example02" component={Example02} />
             <Route component={NoMatch} />
           </Switch>
         </Layout>
