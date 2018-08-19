@@ -16,11 +16,13 @@ class Example02 extends Component {
 
     this.state = {
       counters: [],
+      needConfirmBeforeDelete: true,
     }
   }
 
   render() {
-    const { counters } = this.state
+    const { counters, needConfirmBeforeDelete } = this.state
+
     const counterItems = counters.length > 0 ? (
       counters.map((count, i) => (
         <Counter
@@ -38,6 +40,13 @@ class Example02 extends Component {
     return (
       <LayoutExamplePage title="Example 02" sourceName="Example02">
         <button onClick={this.handleAddCounter}>Add Counter</button>
+        <NeedComfirm>
+          <input
+            type="checkbox"
+            checked={needConfirmBeforeDelete}
+            onChange={this.handleNeedConfirmBeforeDelete}
+          /> Need confirm before delete.
+        </NeedComfirm>
         <hr />
         {counterItems}
       </LayoutExamplePage>
@@ -51,8 +60,15 @@ class Example02 extends Component {
     this.setState({ counters })
   }
 
+  handleNeedConfirmBeforeDelete = (event) => {
+    this.setState({ needConfirmBeforeDelete: event.target.checked })
+  }
+
   handleOnDelete = (index) => {
-    if (!confirm('Do you want to delete this counter?')) { return }
+    if (this.state.needConfirmBeforeDelete
+        && !confirm('Do you want to delete this counter?')) {
+      return
+    }
 
     const counters = [ ...this.state.counters ]
     counters.splice(index, 1)
@@ -109,6 +125,14 @@ const Counter = ({ index, count, onDelete, onAdd, onMinus }) => {
     </Container>
   )
 }
+
+
+const NeedComfirm = styled.label`
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+  user-select: none;
+`
 
 const Container = styled.div`
   padding: 20px;
