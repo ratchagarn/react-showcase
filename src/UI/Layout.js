@@ -77,12 +77,14 @@ Menu.Item = styled.li`
     color: #333;
     font-size: 14px;
     text-decoration: none;
+    transition: .2s;
 
     &.active {
       font-weight: bold;
     }
 
     &:hover {
+      color: #666;
       text-decoration: underline;
     }
   }
