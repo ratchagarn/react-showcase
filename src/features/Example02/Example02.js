@@ -137,7 +137,7 @@ const NeedComfirm = styled.label`
 const Container = styled.div`
   padding: 20px;
   border: 1px dashed #CCC;
-  margin-bottom: 20px;
+  margin-top: 20px;
 `
 
 const Title = styled.h3`
