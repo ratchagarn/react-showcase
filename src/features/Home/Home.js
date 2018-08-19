@@ -4,7 +4,7 @@ import Container from 'UI/Container'
 
 const Home = () => (
   <Container>
-    <p>This is React showcase Application that build by `create-react-app`</p>
+    <p>React Application showcase that build by <a href="https://github.com/facebook/create-react-app" target="_blank">Create React App</a></p>
   </Container>
 )
 
