@@ -51,7 +51,7 @@ class FetchJndWebApiData extends Component {
             this.setState({ loading: false }, () => {
               onSuccess(response)
             })
-          , delay})
+          }, delay)
         })
       })
       .catch(error => {
