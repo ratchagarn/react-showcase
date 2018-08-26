@@ -3,15 +3,16 @@
  * Features - Example03/Campaigns
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Loading from 'UI/Loading'
+import LoadingCover from 'UI/LoadingCover'
 import Pagination from 'UI/Pagination'
 
 
 const Campaigns = ({ loading, response, onPageChange }) => {
-  if (loading) return <Loading />
+  if (loading && !response) return <Loading />
 
   const campaignsItems = response.data.data.map((item, i) => (
     <CampaignsItem key={item.id} data={item} />
@@ -23,7 +24,7 @@ const Campaigns = ({ loading, response, onPageChange }) => {
 
 
   return (
-    <Fragment>
+    <Container>
       <Table>
         <thead>
           <tr>
@@ -36,14 +37,13 @@ const Campaigns = ({ loading, response, onPageChange }) => {
           {campaignsItems}
         </tbody>
       </Table>
-      {!loading && (
-        <Pagination
-          initialPage={initialPage}
-          pageCount={pageCount}
-          onPageChange={onPageChange}
-        />
-      )}
-    </Fragment>
+      <Pagination
+        initialPage={initialPage}
+        pageCount={pageCount}
+        onPageChange={onPageChange}
+      />
+      <LoadingCover show={loading && response} />
+    </Container>
   )
 }
 
@@ -63,6 +63,10 @@ const CampaignsItem = ({ data }) => (
  * UI
  * --------------------------------------------------------
  */
+const Container = styled.div`
+  position: relative;
+`
+
 const Table = styled.table`
   width: 100%;
   margin-bottom: 20px;
