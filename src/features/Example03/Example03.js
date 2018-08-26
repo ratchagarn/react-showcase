@@ -31,6 +31,7 @@ class Example03 extends Component {
         <FetchJndWebApiData
           path="campaigns"
           params={params}
+          delay={250}
           render={(props) => (
             <Campaigns
               { ...props }

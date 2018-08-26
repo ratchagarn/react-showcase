@@ -8,6 +8,7 @@ import axios from 'axios'
 
 class FetchJndWebApiData extends Component {
   static defaultProps = {
+    delay: 0,
     onSuccess: () => {},
     onError: () => {},
   }
@@ -38,7 +39,7 @@ class FetchJndWebApiData extends Component {
   }
 
   fetchData = (path, params) => {
-    const { onSuccess, onError } = this.props
+    const { delay, onSuccess, onError } = this.props
 
     axios
       .get(`http://crm-api.jndweb.com/v1/${path}`, {
@@ -46,9 +47,11 @@ class FetchJndWebApiData extends Component {
       })
       .then(response => {
         this.setState({ response }, () => {
-          this.setState({ loading: false }, () => {
-            onSuccess(response)
-          })
+          setTimeout(() => {
+            this.setState({ loading: false }, () => {
+              onSuccess(response)
+            })
+          , delay})
         })
       })
       .catch(error => {
