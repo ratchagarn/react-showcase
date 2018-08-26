@@ -4,7 +4,6 @@
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
 import React, { Component } from 'react'
-// import styled from 'styled-components'
 
 import LayoutExamplePage from 'UI/LayoutExamplePage'
 import FetchJndWebApiData from 'modules/FetchJndWebApiData'
@@ -13,13 +12,18 @@ import Campaigns from './Campaigns'
 
 
 class Example03 extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selectedPage: 1,
+    }
+  }
 
   render() {
+    const { selectedPage } = this.state
     const params = {
-      page: 2,
+      page: selectedPage,
     }
 
     return (
@@ -27,10 +31,20 @@ class Example03 extends Component {
         <FetchJndWebApiData
           path="campaigns"
           params={params}
-          render={(props) => <Campaigns { ...props } />}
+          render={(props) => (
+            <Campaigns
+              { ...props }
+              onPageChange={this.handleOnPageChange}
+            />
+          )}
         />
       </LayoutExamplePage>
     )
+  }
+
+  handleOnPageChange = (data) => {
+    const { selected } = data
+    this.setState({ selectedPage: selected + 1 })
   }
 }
 

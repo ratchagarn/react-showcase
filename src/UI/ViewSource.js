@@ -7,7 +7,7 @@ const baseUrl = 'https://github.com/ratchagarn/react-showcase/blob/master/src/fe
 const ViewSource = ({ name }) => (
   <Container>
     <Link
-      href={`${baseUrl}/${name}/${name}.js`}
+      href={`${baseUrl}/${name}`}
       target="_blank"
       rel="noopener noreferrer">
       View Source

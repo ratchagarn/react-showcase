@@ -10,26 +10,37 @@ import Loading from 'UI/Loading'
 import Pagination from 'UI/Pagination'
 
 
-const Campaigns = ({ loading, response }) => {
+const Campaigns = ({ loading, response, onPageChange }) => {
   if (loading) return <Loading />
 
-  const campaignsItems = response.data.map((item, i) => (
+  const campaignsItems = response.data.data.map((item, i) => (
     <CampaignsItem key={item.id} data={item} />
   ))
+
+  const { current_page, per_page, total } = response.data.meta
+  const initialPage = current_page - 1
+  const pageCount = Math.ceil(total / per_page)
+
 
   return (
     <Fragment>
       <Table>
         <thead>
-          <th>ID</th>
-          <th align="left">Name</th>
-          <th align="right">Amount</th>
+          <tr>
+            <th>ID</th>
+            <th align="left">Name</th>
+            <th align="right">Amount</th>
+          </tr>
         </thead>
         <tbody>
           {campaignsItems}
         </tbody>
       </Table>
-      <Pagination />
+      <Pagination
+        initialPage={initialPage}
+        pageCount={pageCount}
+        onPageChange={onPageChange}
+      />
     </Fragment>
   )
 }
@@ -59,8 +70,10 @@ const Table = styled.table`
     padding-bottom: 10px;
     border-bottom: 1px solid #CCC;
 
-    > th {
-      padding: 8px;
+    > tr {
+      > th {
+        padding: 8px;
+      }
     }
   }
 
