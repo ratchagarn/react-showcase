@@ -18,11 +18,15 @@ const LoadingCover = styled.div`
     content: 'Loading...';
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    padding: 10px 20px;
+    border-radius: 4px;
     text-align: center;
-    text-shadow: 1px 1px 0 #CCC;
-    transform: translateY(-50%);
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    box-shadow: 0 0 5px black;
+    transform: translateX(-50%) translateY(-50%);
   }
 `
 
