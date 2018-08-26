@@ -7,7 +7,9 @@ import React, { Component } from 'react'
 // import styled from 'styled-components'
 
 import LayoutExamplePage from 'UI/LayoutExamplePage'
-import Pagination from 'UI/Pagination'
+import FetchJndWebApiData from 'modules/FetchJndWebApiData'
+
+import Campaigns from './Campaigns'
 
 
 class Example03 extends Component {
@@ -16,10 +18,16 @@ class Example03 extends Component {
   // }
 
   render() {
+    const params = {
+      page: 2,
+    }
+
     return (
       <LayoutExamplePage title="Example 03 - Pagination" sourceName="Example03">
-        <Pagination
-          pageCount={10}
+        <FetchJndWebApiData
+          path="campaigns"
+          params={params}
+          render={(props) => <Campaigns { ...props } />}
         />
       </LayoutExamplePage>
     )
