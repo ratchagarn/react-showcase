@@ -27,20 +27,22 @@ const Campaigns = ({ loading, response, onPageChange }) => {
       <Table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th align="left">Name</th>
-            <th align="right">Amount</th>
+            <Id>ID</Id>
+            <Name>Name</Name>
+            <Amount align="right">Amount</Amount>
           </tr>
         </thead>
         <tbody>
           {campaignsItems}
         </tbody>
       </Table>
-      <Pagination
-        initialPage={initialPage}
-        pageCount={pageCount}
-        onPageChange={onPageChange}
-      />
+      {!loading && (
+        <Pagination
+          initialPage={initialPage}
+          pageCount={pageCount}
+          onPageChange={onPageChange}
+        />
+      )}
     </Fragment>
   )
 }
@@ -50,9 +52,9 @@ export default Campaigns
 
 const CampaignsItem = ({ data }) => (
   <tr>
-    <td align="center">{data.id}</td>
-    <td>{data.name}</td>
-    <td align="right">{data.amount}</td>
+    <Id>{data.id}</Id>
+    <Name>{data.name}</Name>
+    <Amount>{data.amount}</Amount>
   </tr>
 )
 
@@ -71,8 +73,9 @@ const Table = styled.table`
     border-bottom: 1px solid #CCC;
 
     > tr {
-      > th {
+      > td {
         padding: 8px;
+        font-weight: bold;
       }
     }
   }
@@ -90,4 +93,18 @@ const Table = styled.table`
       }
     }
   }
+`
+
+const Id = styled.td`
+  width: 100px;
+  text-align: center;
+`
+
+const Name = styled.td`
+  width: calc(100% - 300px)
+`
+
+const Amount = styled.td`
+  width: 200px;
+  text-align: right;
 `
