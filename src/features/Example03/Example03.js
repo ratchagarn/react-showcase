@@ -6,7 +6,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import queryString from 'query-string'
+import URI from 'urijs'
 
 import LayoutExamplePage from 'UI/LayoutExamplePage'
 import FetchJndWebApiData from 'modules/FetchJndWebApiData'
@@ -18,7 +18,7 @@ class Example03 extends Component {
   constructor(props) {
     super(props)
 
-    const query = queryString.parse(props.history.location.search)
+    const query = URI(props.history.location.search).query(true)
 
     this.state = {
       selectedPage: query.page,
