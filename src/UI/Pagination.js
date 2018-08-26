@@ -38,7 +38,7 @@ Pagination.defaultProps = {
   initialPage: 1,
   marginPagesDisplayed: 2,
   pageRangeDisplayed: 5,
-  onPageChange: () => {},  
+  onPageChange: () => {},
 }
 
 export default styled(Pagination)`
@@ -60,7 +60,7 @@ export default styled(Pagination)`
         border-radius: 2px;
         outline: none;
         transition: .2s;
-        
+
         &:hover {
           background-color: #EFEFEF;
         }
@@ -70,6 +70,12 @@ export default styled(Pagination)`
         > a {
           background-color: blue;
           color: white;
+        }
+      }
+
+      &.disabled {
+        > a {
+          color: #CCC;
         }
       }
 
