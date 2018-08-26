@@ -17,6 +17,10 @@ const menu = [
     name: 'Example 02',
     path: '/example02',
   },
+  {
+    name: 'Example 03',
+    path: '/example03',
+  },
 ]
 
 const Layout = ({ children }) => {
