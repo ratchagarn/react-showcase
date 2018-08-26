@@ -4,7 +4,9 @@
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import queryString from 'query-string'
 
 import LayoutExamplePage from 'UI/LayoutExamplePage'
 import FetchJndWebApiData from 'modules/FetchJndWebApiData'
@@ -16,8 +18,10 @@ class Example03 extends Component {
   constructor(props) {
     super(props)
 
+    const query = queryString.parse(props.history.location.search)
+
     this.state = {
-      selectedPage: 1,
+      selectedPage: query.page,
       currentApiUrl: '',
     }
   }
@@ -60,11 +64,13 @@ class Example03 extends Component {
 
   handleOnPageChange = (data) => {
     const { selected } = data
-    this.setState({ selectedPage: selected + 1 })
+    this.setState({ selectedPage: selected + 1 }, () => {
+      this.props.history.push(`?page=${this.state.selectedPage}`)
+    })
   }
 }
 
-export default Example03
+export default withRouter(Example03)
 
 
 const CurrentApiUrl = styled.div`
