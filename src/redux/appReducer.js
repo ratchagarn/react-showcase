@@ -8,7 +8,7 @@ export const ACTION_TYPES = {
 }
 
 export const initialState = {
-  locale: 'TH',
+  locale: localStorage.getItem('locale'),
 }
 
 const reducer = (state = initialState, action) => {
