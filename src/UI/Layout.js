@@ -2,31 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
+import SwitchLocale from './SwitchLocale'
 
-const menu = [
-  {
-    name: 'Home',
-    path: '/',
-    exact: true,
-  },
-  {
-    name: 'Example 01',
-    path: '/example01',
-  },
-  {
-    name: 'Example 02',
-    path: '/example02',
-  },
-  {
-    name: 'Example 03',
-    path: '/example03',
-  },
-]
 
-const Layout = ({ children }) => {
-  const menuList = menu.map((item, i) => (
+const Layout = ({ routes, children }) => {
+  const menuList = routes.map((route, i) => (
     <Menu.Item key={`menu-item-${i}`}>
-      <NavLink exact={item.exact} to={item.path}>{item.name}</NavLink>
+      <NavLink exact={route.exact} to={route.path}>{route.name}</NavLink>
     </Menu.Item>
   ))
 
@@ -34,6 +16,7 @@ const Layout = ({ children }) => {
     <Container>
       <Sidebar>
         <MenuTitle>Menu</MenuTitle>
+        <SwitchLocale />
         <Menu>
           {menuList}
         </Menu>

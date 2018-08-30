@@ -3,12 +3,9 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { injectGlobal } from 'styled-components'
 
 import Layout from 'UI/Layout'
-
-import Home from 'features/Home'
-import Example01 from 'features/Example01'
-import Example02 from 'features/Example02'
-import Example03 from 'features/Example03'
 import NoMatch from 'features/NoMatch'
+
+import routes from './routes'
 
 
 injectGlobal([`
@@ -43,12 +40,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Layout>
+        <Layout routes={routes}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/example01" component={Example01} />
-            <Route path="/example02" component={Example02} />
-            <Route path="/example03" component={Example03} />
+            {routes.map(route => (
+              <Route
+                path={route.path}
+                exact={route.exact}
+                component={route.component} />
+            ))}
             <Route component={NoMatch} />
           </Switch>
         </Layout>
