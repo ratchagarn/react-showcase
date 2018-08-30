@@ -42,8 +42,9 @@ class App extends Component {
       <Router>
         <Layout routes={routes}>
           <Switch>
-            {routes.map(route => (
+            {routes.map((route) => (
               <Route
+                key={`page-${route.name}`}
                 path={route.path}
                 exact={route.exact}
                 component={route.component} />
