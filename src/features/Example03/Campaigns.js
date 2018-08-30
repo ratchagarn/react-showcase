@@ -11,7 +11,7 @@ import LoadingCover from 'UI/LoadingCover'
 import Pagination from 'UI/Pagination'
 
 
-const Campaigns = ({ loading, response, onPageChange }) => {
+export const Campaigns = ({ loading, response, onPageChange }) => {
   if (loading && !response) return <Loading />
 
   const campaignsItems = response.data.data.map((item, i) => (
@@ -21,7 +21,6 @@ const Campaigns = ({ loading, response, onPageChange }) => {
   const { current_page, per_page, total } = response.data.meta
   const initialPage = current_page - 1
   const pageCount = Math.ceil(total / per_page)
-
 
   return (
     <Container>
