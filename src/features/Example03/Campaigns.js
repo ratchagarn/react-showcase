@@ -4,6 +4,7 @@
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import Loading from 'UI/Loading'
@@ -47,7 +48,9 @@ export const Campaigns = ({ loading, response, onPageChange }) => {
   )
 }
 
-export default Campaigns
+const mapStateToProps = (state) => ({ ...state })
+
+export default connect(mapStateToProps)(Campaigns)
 
 
 const CampaignsItem = ({ data }) => (
