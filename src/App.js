@@ -5,7 +5,7 @@ import { injectGlobal } from 'styled-components'
 import Layout from 'UI/Layout'
 import NoMatch from 'features/NoMatch'
 
-import routes from './routes'
+import routes from 'config/routes'
 
 
 injectGlobal([`
