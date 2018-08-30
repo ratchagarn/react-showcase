@@ -29,6 +29,7 @@ export const Campaigns = ({ loading, response, onPageChange }) => {
           <tr>
             <Id>ID</Id>
             <Name>Name</Name>
+            <Promotions>Promotions</Promotions>
             <Amount align="right">Amount</Amount>
           </tr>
         </thead>
@@ -53,6 +54,7 @@ const CampaignsItem = ({ data }) => (
   <tr>
     <Id>{data.id}</Id>
     <Name>{data.name}</Name>
+    <Promotions>{removeHTML(data.promotions[0].detail_en)}</Promotions>
     <Amount>{data.amount}</Amount>
   </tr>
 )
@@ -104,10 +106,28 @@ const Id = styled.td`
 `
 
 const Name = styled.td`
-  width: calc(100% - 300px)
+  width: calc(100% - 700px)
+`
+
+const Promotions = styled.td`
+  width: 400px;
 `
 
 const Amount = styled.td`
   width: 200px;
   text-align: right;
 `
+
+
+/**
+ * --------------------------------------------------------
+ * Helpers
+ * --------------------------------------------------------
+ */
+function removeHTML(content) {
+  const div = document.createElement('div')
+  div.innerHTML = content
+
+  return div.textContent || div.innerText || ''
+
+}
