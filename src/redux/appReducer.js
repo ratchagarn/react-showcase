@@ -29,5 +29,5 @@ export default reducer
 
 export const actionSetLocale = (locale) => ({
   type: ACTION_TYPES.SET_LOCALE,
-  locale,
+  locale: locale.toUpperCase(),
 })
