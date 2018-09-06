@@ -17,11 +17,11 @@ const CreatePromotionForm = ({ id, onClickAdd, onClickDelete }) => {
       <Header>โปรโมชั่น - {id}</Header>
       <Form.Block>
         <Form.Label>ชื่อโปรโมชั่น</Form.Label>
-        <Form.Input />
+        <Form.Input name="name" autoComplete="off" />
       </Form.Block>
       <Form.Block>
         <Form.Label>รายละเอียด</Form.Label>
-        <Form.Textarea />
+        <Form.Textarea name="detail" autoComplete="off" />
       </Form.Block>
     </Container>
   )

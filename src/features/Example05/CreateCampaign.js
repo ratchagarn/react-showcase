@@ -20,12 +20,11 @@ class CreateCampaign extends Component {
 
     this.defaultState = {
       showResult: false,
+      campaignName: '',
+      campaignCondition: '',
+      campaignErrorFields: [],
       promotionId,
-      campaignData: {
-        name: '',
-        codition: '',
-      },
-      promotionData: [{
+      promotions: [{
         id: promotionId,
         name: '',
         detail: '',
@@ -36,12 +35,19 @@ class CreateCampaign extends Component {
   }
 
   render() {
-    const { showResult, promotionData } = this.state
+    const {
+      showResult,
+      campaignName,
+      campaignCondition,
+      campaignErrorFields,
+      promotions,
+    } = this.state
+
     const outputData = { ...this.state }
     delete outputData.showResult
 
 
-    const promotionForms = promotionData.map((item, index) => (
+    const promotionForms = promotions.map((item, index) => (
       <CreatePromotionForm
         key={`promotion-${index}`}
         id={item.id}
@@ -53,7 +59,12 @@ class CreateCampaign extends Component {
 
     return (
       <Form onSubmit={(e) => e.preventDefault()}>
-        <CreateCampaignForm />
+        <CreateCampaignForm
+          errorFields={campaignErrorFields}
+          campaignName={campaignName}
+          campaignCondition={campaignCondition}
+          onInputChange={this.handleOnCampaignInputChange}
+        />
         {promotionForms}
         <Button
           bgColor="dodgerblue"
@@ -76,13 +87,19 @@ class CreateCampaign extends Component {
     )
   }
 
+  handleOnCampaignInputChange = (event) => {
+    const { name, value } = event.target
+
+    this.setState({ [name]: value })
+  }
+
 
   handleOnAddPromotion = () => {
-    const promotionData = [ ...this.state.promotionData ]
+    const promotions = [ ...this.state.promotions ]
     const nextId = this.state.promotionId + 1
 
 
-    promotionData.push({
+    promotions.push({
       id: nextId,
       name: '',
       detail: '',
@@ -91,23 +108,57 @@ class CreateCampaign extends Component {
     this.setState({
       showResult: false,
       promotionId: nextId,
-      promotionData,
+      promotions,
     })
   }
 
   handleOnDeletePromotion = (id) => {
-    const promotionData = this.state.promotionData.filter((item) => (
+    if (this.state.promotions.length === 1) {
+      alert('ไม่สามารถทำการลบได้ เนื่องจากต้องมีอย่างน้อย 1 โปรโมชั่น')
+      return
+    }
+
+    const promotions = this.state.promotions.filter((item) => (
       item.id !== id ? item : null
     ))
 
-    this.setState({ showResult: false, promotionData })
+    this.setState({ showResult: false, promotions })
   }
 
 
   handleOnSave = (event) => {
     event.preventDefault()
 
-    this.setState({ showResult: true })
+    const campaignErrorFields = [ ...this.state.campaignErrorFields ]
+
+    const campaignFields = [
+      'campaignName',
+      'campaignCondition'
+    ]
+
+    campaignFields.forEach((name) => {
+      const index = campaignErrorFields.indexOf(name)
+
+      if (this.state[name] === '' && index === -1) {
+        campaignErrorFields.push(name)
+      }
+      else {
+        campaignErrorFields.splice(index, 1)
+      }
+    })
+
+    if (campaignErrorFields.length > 0) {
+      this.setState({ campaignErrorFields })
+    }
+
+    if (campaignErrorFields.length > 0) {
+      window.scrollTo(0, 0)
+    }
+
+    this.setState({
+      showResult: campaignErrorFields.length === 0,
+      campaignErrorFields,
+    })
   }
 
   handleOnCancel = (event) => {

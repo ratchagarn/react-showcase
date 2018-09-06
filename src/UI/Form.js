@@ -26,15 +26,17 @@ Form.Input = styled.input`
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px solid #CCC;
+  border: 2px solid #CCC;
   background-color: ${props => props.disabled ? '#DDD' : 'white'};
+  color: ${props => props.hasError ? 'red' : 'black'};
+  border-color: ${props => props.hasError ? 'red' : null};
   font-size: 14px;
   outline: none;
   border-radius: 2px;
   transition: .2s;
 
   &:focus {
-    border-color: blue;
+    border-color: ${props => props.hasError ? 'red' : 'blue'};
   }
 `
 
@@ -44,14 +46,16 @@ Form.Textarea = styled.textarea.attrs({
   display: block;
   width: 100%;
   padding: 10px;
-  border: 1px solid #CCC;
+  border: 2px solid #CCC;
   background-color: ${props => props.disabled ? '#DDD' : 'white'};
+  color: ${props => props.hasError ? 'red' : 'black'};
+  border-color: ${props => props.hasError ? 'red' : null};
   font-size: 14px;
   outline: none;
   border-radius: 2px;
   transition: .2s;
 
   &:focus {
-    border-color: blue;
+    border-color: ${props => props.hasError ? 'red' : 'blue'};
   }
 `
