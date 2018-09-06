@@ -15,6 +15,9 @@ class Example01 extends Component {
 
     this.state = {
       rows: 0,
+      params: {
+        campaigns: [],
+      }
     }
   }
 
@@ -28,6 +31,7 @@ class Example01 extends Component {
 
     return (
       <LayoutExamplePage title="Example 01" sourceName="Example01">
+        <button onClick={this.handleOnAddCampaigns}>Add Campaigns</button>
         <Wrapper>
           {fields}
         </Wrapper>
@@ -35,6 +39,22 @@ class Example01 extends Component {
         <button onClick={this.handleOnAddField}>Add new field</button>
       </LayoutExamplePage>
     )
+  }
+
+  handleOnAddCampaigns = () => {
+    const campaigns = [ ...this.state.params.campaigns ]
+    campaigns.push({
+      type: `Type - ${campaigns.length + 1}`,
+      name: `Name - ${campaigns.length + 1}`,
+    })
+    
+    this.setState({
+      params: {
+        campaigns,
+      }
+    }, () => {
+      console.log(this.state.params.campaigns)
+    })
   }
 
   handleOnAddField = () => {

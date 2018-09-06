@@ -8,6 +8,7 @@ import Example01 from 'features/Example01'
 import Example02 from 'features/Example02'
 import Example03 from 'features/Example03'
 import Example04 from 'features/Example04'
+import Example05 from 'features/Example05'
 
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     name: 'Example 04',
     path: '/example04',
     component: Example04,
+  },
+  {
+    name: 'Example 05',
+    path: '/example05',
+    component: Example05,
   },
 ]
 

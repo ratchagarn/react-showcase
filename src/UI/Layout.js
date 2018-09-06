@@ -48,6 +48,7 @@ const Sidebar = styled.div`
 const Content = styled.div`
   width: calc(100% - 200px);
   margin-left: 200px;
+  padding-bottom: 100px;
 `
 
 const MenuTitle = styled.h3`
