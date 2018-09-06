@@ -9,23 +9,42 @@ import styled from 'styled-components'
 import Form from 'UI/Form'
 
 
-const CreatePromotionForm = ({ id, onClickAdd, onClickDelete }) => {
-  return (
-    <Container>
-      <ActionButton bgColor="red" onClick={() => onClickDelete(id)}>− ลบ</ActionButton>
-      <ActionButton bgColor="green" onClick={onClickAdd}>+ เพิ่ม</ActionButton>
-      <Header>โปรโมชั่น - {id}</Header>
-      <Form.Block>
-        <Form.Label>ชื่อโปรโมชั่น</Form.Label>
-        <Form.Input name="name" autoComplete="off" />
-      </Form.Block>
-      <Form.Block>
-        <Form.Label>รายละเอียด</Form.Label>
-        <Form.Textarea name="detail" autoComplete="off" />
-      </Form.Block>
-    </Container>
-  )
-}
+const CreatePromotionForm = ({
+  index,
+  id,
+  data,
+  errorFields,
+  onClickAdd,
+  onClickDelete,
+  onInputChange,
+}) => (
+  <Container>
+    <ActionButton bgColor="red" onClick={() => onClickDelete(id, index)}>− ลบ</ActionButton>
+    <ActionButton bgColor="green" onClick={onClickAdd}>+ เพิ่ม</ActionButton>
+    <Header>โปรโมชั่น - {id}</Header>
+    <Form.Block>
+      <Form.Label>ชื่อโปรโมชั่น</Form.Label>
+      <Form.Input
+        name="name"
+        autoComplete="off"
+        value={data.name}
+        hasError={errorFields.indexOf('name') > -1}
+        onChange={(event) => onInputChange(event, index)}
+      />
+    </Form.Block>
+    <Form.Block>
+      <Form.Label>รายละเอียด</Form.Label>
+      <Form.Textarea
+        name="detail"
+        autoComplete="off"
+        value={data.detail}
+        hasError={errorFields.indexOf('detail') > -1}
+        onChange={(event) => onInputChange(event, index)}
+      />
+    </Form.Block>
+  </Container>
+)
+
 
 
 CreatePromotionForm.defaultProps = {

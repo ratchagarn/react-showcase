@@ -29,6 +29,7 @@ class CreateCampaign extends Component {
         name: '',
         detail: '',
       }],
+      promotionsErrorFields: [[]],
     }
 
     this.state = { ...this.defaultState }
@@ -40,6 +41,7 @@ class CreateCampaign extends Component {
       campaignName,
       campaignCondition,
       campaignErrorFields,
+      promotionsErrorFields,
       promotions,
     } = this.state
 
@@ -47,12 +49,16 @@ class CreateCampaign extends Component {
     delete outputData.showResult
 
 
-    const promotionForms = promotions.map((item, index) => (
+    const promotionForms = promotions.map((data, index) => (
       <CreatePromotionForm
         key={`promotion-${index}`}
-        id={item.id}
+        index={index}
+        id={data.id}
+        data={data}
+        errorFields={promotionsErrorFields[index]}
         onClickAdd={this.handleOnAddPromotion}
         onClickDelete={this.handleOnDeletePromotion}
+        onInputChange={this.handleOnPromotionsInputChange}
       />
     ))
 
@@ -94,8 +100,19 @@ class CreateCampaign extends Component {
   }
 
 
+  handleOnPromotionsInputChange = (event, index) => {
+    const { name, value } = event.target
+    const promotions = [ ...this.state.promotions ]
+
+    promotions[index][name] = value
+
+    this.setState({ promotions })
+  }
+
+
   handleOnAddPromotion = () => {
     const promotions = [ ...this.state.promotions ]
+    const promotionsErrorFields = [ ...this.state.promotionsErrorFields ]
     const nextId = this.state.promotionId + 1
 
 
@@ -105,14 +122,17 @@ class CreateCampaign extends Component {
       detail: '',
     })
 
+    promotionsErrorFields.push([])
+
     this.setState({
       showResult: false,
       promotionId: nextId,
       promotions,
+      promotionsErrorFields,
     })
   }
 
-  handleOnDeletePromotion = (id) => {
+  handleOnDeletePromotion = (id, index) => {
     if (this.state.promotions.length === 1) {
       alert('ไม่สามารถทำการลบได้ เนื่องจากต้องมีอย่างน้อย 1 โปรโมชั่น')
       return
@@ -122,13 +142,50 @@ class CreateCampaign extends Component {
       item.id !== id ? item : null
     ))
 
-    this.setState({ showResult: false, promotions })
+    const promotionsErrorFields = [ ...this.state.promotionsErrorFields ]
+    promotionsErrorFields.splice(index, 1)
+
+    this.setState({
+      showResult: false,
+      promotions,
+      promotionsErrorFields
+    })
   }
 
 
   handleOnSave = (event) => {
     event.preventDefault()
 
+    const campaignErrorFields = this.validateCampiagnData()
+    const promotionsErrorFields = this.validatePromotionsData()
+
+    if (campaignErrorFields.length > 0 || promotionsErrorFields.length > 0) {
+      window.scrollTo(0, 0)
+    }
+
+    const findPromotionsErrors = promotionsErrorFields.filter((error) => (
+      error.length > 0
+    ))
+
+    this.setState({
+      showResult: true,
+      campaignErrorFields,
+      promotionsErrorFields,
+    }, () => {
+      if (campaignErrorFields.length === 0 &&
+          findPromotionsErrors.length === 0) {
+        alert('บันทึกข้อมูลเรียบร้อย !!')
+      }
+    })
+  }
+
+  handleOnCancel = (event) => {
+    event.preventDefault()
+
+    this.setState({ ...this.defaultState })
+  }
+
+  validateCampiagnData = () => {
     const campaignErrorFields = [ ...this.state.campaignErrorFields ]
 
     const campaignFields = [
@@ -137,34 +194,38 @@ class CreateCampaign extends Component {
     ]
 
     campaignFields.forEach((name) => {
-      const index = campaignErrorFields.indexOf(name)
+      const findIndex = campaignErrorFields.indexOf(name)
 
-      if (this.state[name] === '' && index === -1) {
+      if (this.state[name] === '' && findIndex === -1) {
         campaignErrorFields.push(name)
       }
-      else {
-        campaignErrorFields.splice(index, 1)
+      else if (this.state[name] !== '' && findIndex > -1) {
+        campaignErrorFields.splice(findIndex, 1)
       }
     })
 
-    if (campaignErrorFields.length > 0) {
-      this.setState({ campaignErrorFields })
-    }
-
-    if (campaignErrorFields.length > 0) {
-      window.scrollTo(0, 0)
-    }
-
-    this.setState({
-      showResult: campaignErrorFields.length === 0,
-      campaignErrorFields,
-    })
+    return campaignErrorFields
   }
 
-  handleOnCancel = (event) => {
-    event.preventDefault()
+  validatePromotionsData = () => {
+    const { promotions } = this.state
+    const promotionsErrorFields = [ ...this.state.promotionsErrorFields ]
+    const promotionFields = ['name', 'detail']
 
-    this.setState({ ...this.defaultState })
+    promotions.forEach((promotion, i) => {
+      promotionFields.forEach((name) => {
+        const findIndex = promotionsErrorFields[i].indexOf(name)
+
+        if (promotion[name] === '' && findIndex === -1) {
+          promotionsErrorFields[i].push(name)
+        }
+        else if (promotion[name] !== '' && findIndex > -1) {
+          promotionsErrorFields[i].splice(findIndex, 1)
+        }
+      })
+    })
+
+    return promotionsErrorFields
   }
 }
 
